@@ -1,0 +1,21 @@
+{
+  "name": "b1-vending",
+  "version": "1.0.0",
+  "description": "B1 Vending - Smart Vending Solutions Website",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vending",
+    "machines",
+    "smart vending",
+    "b1 vending"
+  ],
+  "author": "B1 Vending",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
