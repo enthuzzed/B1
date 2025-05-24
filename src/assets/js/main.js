@@ -156,6 +156,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Initialize language handling
+let currentLang = localStorage.getItem('language') || 'en';
+
+function initLanguage() {
+    const languageSelector = document.getElementById('languageSelector');
+    if (languageSelector) {
+        languageSelector.value = currentLang;
+        translatePage();
+        
+        languageSelector.addEventListener('change', (e) => {
+            currentLang = e.target.value;
+            localStorage.setItem('language', currentLang);
+            translatePage();
+        });
+    }
+}
+
+function translatePage() {
+    document.documentElement.lang = currentLang;
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[currentLang] && translations[currentLang][key]) {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                element.placeholder = translations[currentLang][key];
+            } else {
+                element.textContent = translations[currentLang][key];
+            }
+        }
+    });
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initializeMobileMenu();
@@ -163,4 +195,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeProducts();
     initializeContactForm();
     initializeSmoothScroll();
+    initLanguage();
 });

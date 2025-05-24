@@ -6,6 +6,7 @@
     <title>B1 - Smart Vending Solutions</title>
     <link rel="stylesheet" href="src/assets/css/style.css">
     <link rel="canonical" href="https://b1.markets">
+    <script src="src/assets/js/translations.js"></script>
     <script src="src/assets/js/main.js" defer></script>
 </head>
 <body>
@@ -23,16 +24,20 @@
                     <h1><span style="font-weight: 800">B1</span></h1>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="#locations">Locations</a></li>
-                    <li><a href="#machines">Vending Machines</a></li>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#solutions">Solutions</a></li>
+                    <li><a href="#locations" data-translate="locations">Locations</a></li>
+                    <li><a href="#machines" data-translate="vendingMachines">Vending Machines</a></li>
+                    <li><a href="#products" data-translate="products">Products</a></li>
+                    <li><a href="#solutions" data-translate="solutions">Solutions</a></li>
                 </ul>
             </div>
             <div class="nav-right">
                 <div class="nav-contact">
                     <span class="phone-number">+84 77 200 7921</span>
-                    <a href="#contact" class="cta-button">Get Started</a>
+                    <select id="languageSelector" class="language-selector">
+                        <option value="en">English</option>
+                        <option value="vi">Tiếng Việt</option>
+                    </select>
+                    <a href="#contact" class="cta-button" data-translate="getStarted">Get Started</a>
                 </div>
             </div>
         </nav>
@@ -42,11 +47,11 @@
         <section id="home" class="hero-section">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1 class="hero-title">Smart Vending <br>Solutions for <br>Modern Spaces</h1>
-                    <p class="hero-subtitle">Transform your space with intelligent vending machines that deliver premium products 24/7</p>
+                    <h1 class="hero-title" data-translate="smartVendingSolutions">Smart Vending Solutions for Modern Spaces</h1>
+                    <p class="hero-subtitle" data-translate="transformSpace">Transform your space with intelligent vending machines that deliver premium products 24/7</p>
                     <div class="hero-cta-group">
-                        <a href="#contact" class="hero-cta primary">Get Started</a>
-                        <a href="#products" class="hero-cta secondary">View Machines</a>
+                        <a href="#contact" class="hero-cta primary" data-translate="getStarted">Get Started</a>
+                        <a href="#products" class="hero-cta secondary" data-translate="viewMachines">View Machines</a>
                     </div>
                     <div class="hero-stats">
                         <div class="stat">
@@ -200,14 +205,12 @@
         </section>
 
         <section id="location-finder" class="location-finder-section">
-            <h2>Find a B1 Vending Machine</h2>
+            <h2 data-translate="findNearestMachine">Find Your Nearest Machine</h2>
             <div class="location-search">
-                <input type="text" id="location-search" placeholder="Enter your location">
-                <button class="search-button">Search</button>
+                <input type="text" data-translate="searchLocation" placeholder="Search location...">
+                <button class="search-button" data-translate="search">Search</button>
             </div>
-            <div id="location-map">
-                <!-- Map will be integrated here -->
-            </div>
+            <div id="location-map"></div>
         </section>
 
         <section id="about" class="about-section">
@@ -232,21 +235,13 @@
         </section>
 
         <section id="contact" class="contact-section">
-            <h2>Partner With Us</h2>
+            <h2 data-translate="contact">Contact</h2>
             <div class="contact-container">
-                <form id="contact-form" class="contact-form">
-                    <input type="text" placeholder="Business Name" required>
-                    <input type="email" placeholder="Email Address" required>
-                    <input type="tel" placeholder="Phone Number" required>
-                    <select name="location-type" required>
-                        <option value="">Select Location Type</option>
-                        <option value="office">Office Building</option>
-                        <option value="education">Educational Institution</option>
-                        <option value="healthcare">Healthcare Facility</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <textarea placeholder="Tell us about your location" required></textarea>
-                    <button type="submit" class="submit-button">Submit Request</button>
+                <form class="contact-form" id="contact-form">
+                    <input type="text" name="name" required placeholder="Your Name" data-translate="yourName">
+                    <input type="email" name="email" required placeholder="Your Email" data-translate="yourEmail">
+                    <textarea name="message" required placeholder="Your Message" data-translate="yourMessage"></textarea>
+                    <button type="submit" class="submit-button" data-translate="submit">Submit</button>
                 </form>
             </div>
         </section>

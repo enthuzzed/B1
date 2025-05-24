@@ -953,3 +953,31 @@ body {
         display: none;
     }
 }
+
+/* Language Selector */
+.language-selector {
+    background-color: transparent;
+    color: var(--accent-color);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+}
+
+.language-selector:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.language-selector option {
+    background-color: var(--primary-color);
+    color: var(--accent-color);
+}
+
+@media screen and (max-width: 768px) {
+    .language-selector {
+        margin: 0.5rem 0;
+    }
+}

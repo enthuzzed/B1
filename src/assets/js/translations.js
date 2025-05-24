@@ -1,0 +1,42 @@
+const translations = {
+    en: {
+        locations: "Locations",
+        vendingMachines: "Vending Machines",
+        products: "Products",
+        solutions: "Solutions",
+        getStarted: "Get Started",
+        smartVendingSolutions: "Smart Vending Solutions for Modern Spaces",
+        transformSpace: "Transform your space with intelligent vending machines that deliver premium products 24/7",
+        viewMachines: "View Machines",
+        findLocation: "Find a Location",
+        contact: "Contact",
+        findNearestMachine: "Find Your Nearest Machine",
+        searchLocation: "Search location...",
+        search: "Search",
+        aboutUs: "About Us",
+        yourName: "Your Name",
+        yourEmail: "Your Email",
+        yourMessage: "Your Message",
+        submit: "Submit"
+    },
+    vi: {
+        locations: "Vị Trí",
+        vendingMachines: "Máy Bán Hàng",
+        products: "Sản Phẩm",
+        solutions: "Giải Pháp",
+        getStarted: "Bắt Đầu",
+        smartVendingSolutions: "Giải Pháp Máy Bán Hàng Thông Minh cho Không Gian Hiện Đại",
+        transformSpace: "Nâng tầm không gian của bạn với máy bán hàng thông minh, cung cấp sản phẩm cao cấp 24/7",
+        viewMachines: "Xem Máy",
+        findLocation: "Tìm Vị Trí",
+        contact: "Liên Hệ",
+        findNearestMachine: "Tìm Máy Gần Nhất",
+        searchLocation: "Tìm kiếm địa điểm...",
+        search: "Tìm Kiếm",
+        aboutUs: "Về Chúng Tôi",
+        yourName: "Họ Tên",
+        yourEmail: "Email",
+        yourMessage: "Tin Nhắn",
+        submit: "Gửi"
+    }
+};
