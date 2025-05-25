@@ -41,7 +41,7 @@ function updateLanguageUI(lang) {
 
     // Update slider position
     toggleSlider.classList.toggle('vi', lang === 'vi');
-    toggleSlider.style.transform = lang === 'vi' ? 'translateX(100%)' : 'translateX(0)';
+    toggleSlider.style.transform = lang === 'vi' ? 'translateX(180%)' : 'translateX(0)';
 
     // Update flag icon
     const flagIcon = toggleSlider.querySelector('.flag-icon');

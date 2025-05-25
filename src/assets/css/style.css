@@ -3,10 +3,10 @@
     --primary-dark: #8cecf8;
     --primary-light: #00D5CA;
     --primary-deep: #00228B;
-    --accent-color: #ffffff;
+    --accent-color: #fcffeb;
     --text-color: #00228B;
     --text-light: #289DFF;
-    --background-light: #ffffff;
+    --background-light: #c9efd4;
     --border-radius: 12px;
     --transition: all 0.3s ease;
 }
@@ -197,7 +197,7 @@ body {
 }
 
 .hero-cta.primary:hover {
-    transform: translateY(-2px);
+    transform: translateY(-12px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
@@ -913,7 +913,7 @@ body {
     .mobile-menu-toggle {
         display: block;
         position: absolute;
-        right: 1rem;
+        left: 1rem;
         top: 1rem;
     }
 }
@@ -1037,6 +1037,7 @@ body {
 .language-toggle .toggle-slider.vi {
     transform: translateX(60px);
 }
+
 
 .language-toggle .lang-option.active {
     color: white;
