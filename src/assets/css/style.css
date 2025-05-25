@@ -117,11 +117,6 @@ body {
     gap: 2rem;
 }
 
-.phone-number {
-    color: var(--accent-color);
-    font-weight: 500;
-}
-
 .cta-button {
     background-color: var(--accent-color);
     color: var(--primary-color) !important;
@@ -999,6 +994,71 @@ body {
     .language-selector {
         margin: 1rem 0;
         width: 100%;
+        max-width: 200px;
+    }
+}
+
+/* Language Toggle */
+.language-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 0 1rem;
+    padding: 0.4rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    user-select: none;
+}
+
+.lang-option {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.lang-option.active {
+    opacity: 1;
+}
+
+.toggle-slider {
+    position: relative;
+    width: 48px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-slider:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.toggle-button {
+    position: absolute;
+    left: 2px;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-slider.vi .toggle-button {
+    transform: translate(24px, -50%);
+}
+
+@media screen and (max-width: 768px) {
+    .language-toggle {
+        margin: 1rem auto;
+        justify-content: center;
         max-width: 200px;
     }
 }

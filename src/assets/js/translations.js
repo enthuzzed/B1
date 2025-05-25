@@ -72,7 +72,8 @@ const translations = {
         yourEmail: "Your Email",
         yourMessage: "Your Message",
         submit: "Submit",
-        
+        formSubmitSuccess: "Thank you for your interest! We will contact you soon.",
+
         // Footer
         followUs: "Follow Us",
         allRights: "All Rights Reserved",
@@ -152,7 +153,8 @@ const translations = {
         yourEmail: "Email",
         yourMessage: "Tin Nhắn",
         submit: "Gửi",
-        
+        formSubmitSuccess: "Cảm ơn bạn đã quan tâm! Chúng tôi sẽ liên hệ với bạn sớm.",
+
         // Footer
         followUs: "Theo Dõi Chúng Tôi",
         allRights: "Đã Đăng Ký Bản Quyền",

@@ -1,98 +1,82 @@
-// Product catalog data
-const products = [
-    {
-        id: 1,
-        name: "Smart Snack Vending Machine",
-        description: "Modern touchscreen vending machine with cashless payment",
-        image: "smart-vending.jpg",
-        features: ["Touchscreen Interface", "Cashless Payments", "Remote Monitoring"]
-    },
-    {
-        id: 2,
-        name: "Healthy Choice Vending Machine",
-        description: "Specialized for healthy snacks and beverages",
-        image: "healthy-vending.jpg",
-        features: ["Temperature Control", "Fresh Food Options", "Digital Display"]
-    },
-    {
-        id: 3,
-        name: "Premium Coffee Vending Machine",
-        description: "Gourmet coffee and hot beverage dispenser",
-        image: "coffee-vending.jpg",
-        features: ["Fresh Ground Coffee", "Multiple Beverages", "Cup Sensor"]
-    }
-];
+// Language handling
+const langState = {
+    current: localStorage.getItem('preferred-language') || 'en'
+};
 
-// Initialize the product catalog
-function initializeProducts() {
-    const productCatalog = document.getElementById('product-catalog');
-    if (!productCatalog) return;
+function initializeLanguageToggle() {
+    const toggleContainer = document.querySelector('.language-toggle');
+    const toggleSlider = document.querySelector('.toggle-slider');
+    const langOptions = document.querySelectorAll('.lang-option');
+    
+    // Set initial state
+    updateLanguageUI(langState.current);
+    translatePage();
 
-    products.forEach(product => {
-        const productElement = document.createElement('div');
-        productElement.className = 'product-card';
-        productElement.innerHTML = `
-            <img src="src/assets/images/${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>${product.description}</p>
-            <ul>
-                ${product.features.map(feature => `<li>${feature}</li>`).join('')}
-            </ul>
-        `;
-        productCatalog.appendChild(productElement);
-    });
-}
-
-// Handle contact form submission
-function initializeContactForm() {
-    const contactForm = document.getElementById('contact-form');
-    if (!contactForm) return;
-
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(contactForm);
-        const data = Object.fromEntries(formData);
-        
-        // Here you would typically send this data to your backend
-        console.log('Form submitted:', data);
-        
-        // Show success message
-        alert('Thank you for your interest! We will contact you soon.');
-        contactForm.reset();
-    });
-}
-
-// Smooth scroll for navigation links
-function initializeSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
+    // Handle click on language options
+    langOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const newLang = option.dataset.lang;
+            langState.current = newLang;
+            localStorage.setItem('preferred-language', newLang);
+            updateLanguageUI(newLang);
+            translatePage();
         });
     });
+    
+    // Handle click on toggle slider
+    toggleSlider.addEventListener('click', () => {
+        const newLang = toggleSlider.classList.contains('vi') ? 'en' : 'vi';
+        
+        langState.current = newLang;
+        localStorage.setItem('preferred-language', newLang);
+        updateLanguageUI(newLang);
+        translatePage();
+    });
 }
 
-// Handle header background on scroll
-function initializeHeader() {
-    const header = document.querySelector('.header');
-    const scrollThreshold = 50;
+function updateLanguageUI(lang) {
+    const toggleSlider = document.querySelector('.toggle-slider');
+    const langOptions = document.querySelectorAll('.lang-option');
+    
+    toggleSlider.classList.toggle('vi', lang === 'vi');
+    langOptions.forEach(option => {
+        option.classList.toggle('active', option.dataset.lang === lang);
+    });
+}
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > scrollThreshold) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+function detectBrowserLanguage() {
+    const browserLang = navigator.language.toLowerCase().split('-')[0];
+    return ['en', 'vi'].includes(browserLang) ? browserLang : 'en';
+}
+
+function translatePage() {
+    document.documentElement.lang = langState.current;
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[langState.current] && translations[langState.current][key]) {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                element.placeholder = translations[langState.current][key];
+            } else {
+                element.textContent = translations[langState.current][key];
+            }
         }
     });
+}
+
+function translatePageWithAnimation() {
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transition = 'opacity 0.3s ease';
+    });
+
+    setTimeout(() => {
+        translatePage();
+        elements.forEach(element => {
+            element.style.opacity = '1';
+        });
+    }, 300);
 }
 
 // Mobile menu functionality
@@ -115,92 +99,59 @@ function initializeMobileMenu() {
             header.classList.remove('menu-open');
         });
     });
+}
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!header.contains(e.target) && navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-            header.classList.remove('menu-open');
+// Handle header background on scroll
+function initializeHeader() {
+    const header = document.querySelector('.header');
+    const scrollThreshold = 50;
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > scrollThreshold) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
         }
     });
 }
 
-// Lazy load and animate machine images
-document.addEventListener('DOMContentLoaded', () => {
-    const machineImages = document.querySelectorAll('.machine-image img');
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.style.opacity = '0';
-                img.src = img.dataset.src;
-                
-                img.onload = () => {
-                    img.style.transition = 'opacity 0.5s ease';
-                    img.style.opacity = '1';
-                };
-                
-                observer.unobserve(img);
+// Smooth scroll for navigation links
+function initializeSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                targetElement.scrollIntoView({
+                    behavior: 'smooth'
+                });
             }
         });
-    }, {
-        threshold: 0.1,
-        rootMargin: '50px'
     });
-    
-    machineImages.forEach(img => {
-        if (img.dataset.src) {
-            imageObserver.observe(img);
-        }
-    });
-});
-
-// Language switching with animation
-function translatePageWithAnimation() {
-    const elements = document.querySelectorAll('[data-translate]');
-    elements.forEach(element => {
-        element.style.opacity = '0';
-        element.style.transition = 'opacity 0.3s ease';
-    });
-
-    setTimeout(() => {
-        translatePage();
-        elements.forEach(element => {
-            element.style.opacity = '1';
-        });
-    }, 300);
 }
 
-function initializeLanguage() {
-    const languageSelector = document.getElementById('languageSelector');
-    if (languageSelector) {
-        languageSelector.value = currentLang;
-        translatePage();
-        
-        languageSelector.addEventListener('change', (e) => {
-            currentLang = e.target.value;
-            localStorage.setItem('preferred-language', currentLang);
-            translatePageWithAnimation();
-        });
-    }
-}
+// Handle contact form submission
+function initializeContactForm() {
+    const contactForm = document.getElementById('contact-form');
+    if (!contactForm) return;
 
-// Detect browser language
-function detectBrowserLanguage() {
-    const browserLang = navigator.language.toLowerCase().split('-')[0];
-    return ['en', 'vi'].includes(browserLang) ? browserLang : 'en';
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData);
+        console.log('Form submitted:', data);
+        alert(translations[langState.current].formSubmitSuccess || 'Thank you for your interest! We will contact you soon.');
+        contactForm.reset();
+    });
 }
-
-// Set initial language
-let currentLang = localStorage.getItem('preferred-language') || detectBrowserLanguage();
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initializeMobileMenu();
     initializeHeader();
-    initializeProducts();
     initializeContactForm();
     initializeSmoothScroll();
-    initializeLanguage();
+    initializeLanguageToggle();
 });
