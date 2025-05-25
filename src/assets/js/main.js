@@ -156,10 +156,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Initialize language handling
-let currentLang = localStorage.getItem('language') || 'en';
+// Language handling
+let currentLang = localStorage.getItem('preferred-language') || 'en';
 
-function initLanguage() {
+function initializeLanguage() {
     const languageSelector = document.getElementById('languageSelector');
     if (languageSelector) {
         languageSelector.value = currentLang;
@@ -167,7 +167,7 @@ function initLanguage() {
         
         languageSelector.addEventListener('change', (e) => {
             currentLang = e.target.value;
-            localStorage.setItem('language', currentLang);
+            localStorage.setItem('preferred-language', currentLang);
             translatePage();
         });
     }
@@ -195,5 +195,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeProducts();
     initializeContactForm();
     initializeSmoothScroll();
-    initLanguage();
+    initializeLanguage();
 });
