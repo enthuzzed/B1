@@ -156,8 +156,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Language handling
-let currentLang = localStorage.getItem('preferred-language') || 'en';
+// Language switching with animation
+function translatePageWithAnimation() {
+    const elements = document.querySelectorAll('[data-translate]');
+    elements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transition = 'opacity 0.3s ease';
+    });
+
+    setTimeout(() => {
+        translatePage();
+        elements.forEach(element => {
+            element.style.opacity = '1';
+        });
+    }, 300);
+}
 
 function initializeLanguage() {
     const languageSelector = document.getElementById('languageSelector');
@@ -168,25 +181,19 @@ function initializeLanguage() {
         languageSelector.addEventListener('change', (e) => {
             currentLang = e.target.value;
             localStorage.setItem('preferred-language', currentLang);
-            translatePage();
+            translatePageWithAnimation();
         });
     }
 }
 
-function translatePage() {
-    document.documentElement.lang = currentLang;
-    const elements = document.querySelectorAll('[data-translate]');
-    elements.forEach(element => {
-        const key = element.getAttribute('data-translate');
-        if (translations[currentLang] && translations[currentLang][key]) {
-            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                element.placeholder = translations[currentLang][key];
-            } else {
-                element.textContent = translations[currentLang][key];
-            }
-        }
-    });
+// Detect browser language
+function detectBrowserLanguage() {
+    const browserLang = navigator.language.toLowerCase().split('-')[0];
+    return ['en', 'vi'].includes(browserLang) ? browserLang : 'en';
 }
+
+// Set initial language
+let currentLang = localStorage.getItem('preferred-language') || detectBrowserLanguage();
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
