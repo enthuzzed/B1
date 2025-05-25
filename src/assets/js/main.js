@@ -24,21 +24,32 @@ function initializeLanguageToggle() {
     });
     
     // Handle click on toggle slider
-    toggleSlider.addEventListener('click', () => {
+    toggleSlider.addEventListener('click', (e) => {
+        e.stopPropagation(); // Prevent event bubbling
         const newLang = toggleSlider.classList.contains('vi') ? 'en' : 'vi';
         
         langState.current = newLang;
         localStorage.setItem('preferred-language', newLang);
         updateLanguageUI(newLang);
-        translatePage();
+        translatePageWithAnimation(); // Use animated transition
     });
 }
 
 function updateLanguageUI(lang) {
     const toggleSlider = document.querySelector('.toggle-slider');
     const langOptions = document.querySelectorAll('.lang-option');
-    
+
+    // Update slider position
     toggleSlider.classList.toggle('vi', lang === 'vi');
+    toggleSlider.style.transform = lang === 'vi' ? 'translateX(100%)' : 'translateX(0)';
+
+    // Update flag icon
+    const flagIcon = toggleSlider.querySelector('.flag-icon');
+    if (flagIcon) {
+        flagIcon.src = lang === 'vi' ? 'src/assets/images/vn.png' : 'src/assets/images/en.png';
+    }
+
+    // Highlight active language
     langOptions.forEach(option => {
         option.classList.toggle('active', option.dataset.lang === lang);
     });
