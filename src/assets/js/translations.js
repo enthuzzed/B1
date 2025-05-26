@@ -89,7 +89,7 @@ const translations = {
         getStarted: "Bắt Đầu",
 
         // Hero Section
-        smartVendingSolutions: "Giải Pháp Máy Bán Hàng Thông Minh cho Không Gian Hiện Đại",
+        smartVendingSolutions: "Giải Pháp Máy Bán Hàng Thông Minh",
         transformSpace: "Nâng tầm không gian của bạn với máy bán hàng thông minh, cung cấp sản phẩm cao cấp 24/7",
         viewMachines: "Xem Máy",
 
