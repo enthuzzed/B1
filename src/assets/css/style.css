@@ -52,6 +52,7 @@ body {
     display: flex;
     align-items: center;
     gap: 4rem;
+    justify-content: flex-end;
 }
 
 .logo {
@@ -114,8 +115,10 @@ body {
 
 .nav-right {
     display: flex;
-    align-items: center;
+    align-items: right;
     gap: 2rem;
+    margin-right: 1rem;
+    justify-content: flex-end;
 }
 
 .cta-button {
@@ -456,7 +459,7 @@ body {
     padding: 1.2rem 1.5rem;
     border: 2px solid rgba(0,0,0,0.1);
     border-radius: var(--border-radius);
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
 }
 
@@ -473,7 +476,7 @@ body {
     border: none;
     border-radius: var(--border-radius);
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
 }
@@ -836,14 +839,14 @@ body {
     }
 
     .nav-container {
-        flex-direction: column;
+        flex-direction: row;
         gap: 1rem;
     }
 
     .nav-left {
-        flex-direction: column;
+        flex-direction: row;
         gap: 1rem;
-        width: 100%;
+        width: 50%;
     }
 
     .nav-links {
@@ -859,7 +862,7 @@ body {
     }
 
     .nav-right {
-        width: 100%;
+        width: 50%;
     }
 
     .nav-contact {
@@ -912,7 +915,7 @@ body {
 @media screen and (max-width: 768px) {
     .mobile-menu-toggle {
         display: block;
-        position: absolute;
+        position: revert;
         left: 1rem;
         top: 1rem;
     }
