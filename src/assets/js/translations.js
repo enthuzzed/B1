@@ -29,12 +29,12 @@ const translations = {
 
         // Machines Section
         ourMachines: "Our Machines",
-        smartSnackMachine: "Smart Snack Machine",
-        smartSnackDescription: "Modern touchscreen vending with cashless payment",
-        healthyChoiceMachine: "Healthy Choice Machine",
-        healthyChoiceDescription: "Specialized for healthy snacks and beverages",
-        premiumCoffeeMachine: "Premium Coffee Machine",
-        premiumCoffeeDescription: "Gourmet coffee and hot beverage dispenser",
+        smartSnackMachine: "Multi-purpose Machine",
+        smartSnackDescription: "Advanced vending solution for diverse product range",
+        healthyChoiceMachine: "Snack & Quick Bites Machine",
+        healthyChoiceDescription: "Perfect for snacks and instant refreshments",
+        premiumCoffeeMachine: "Compact Drink Machine",
+        premiumCoffeeDescription: "Efficient beverage dispensing in a compact design",
 
         // Features
         touchscreenInterface: "Touchscreen Interface",
@@ -110,19 +110,12 @@ const translations = {
 
         // Machines Section
         ourMachines: "Máy Bán Hàng",
-        smartSnackMachine: "Máy Bán Đồ Ăn Vặt Thông Minh",
-        smartSnackDescription: "Máy bán hàng hiện đại với màn hình cảm ứng và thanh toán không tiền mặt",
-        healthyChoiceMachine: "Máy Bán Đồ Ăn Lành Mạnh",
-        healthyChoiceDescription: "Chuyên biệt cho đồ ăn vặt và đồ uống có lợi cho sức khỏe",
-        premiumCoffeeMachine: "Máy Pha Cà Phê Cao Cấp",
-        premiumCoffeeDescription: "Máy pha cà phê và đồ uống nóng chất lượng cao",
-
-        // Features
-        touchscreenInterface: "Màn Hình Cảm Ứng",
-        cashlessPayments: "Thanh Toán Không Tiền Mặt",
-        remoteMonitoring: "Giám Sát Từ Xa",
-        temperatureControl: "Kiểm Soát Nhiệt Độ",
-        freshFoodOptions: "Thực Phẩm Tươi",
+        smartSnackMachine: "Máy Đa Năng",
+        smartSnackDescription: "Giải pháp bán hàng tự động cho nhiều loại sản phẩm",
+        healthyChoiceMachine: "Máy Bán Đồ Ăn Vặt",
+        healthyChoiceDescription: "Hoàn hảo cho đồ ăn nhẹ và giải khát nhanh",
+        premiumCoffeeMachine: "Máy Đồ Uống Mini",
+        premiumCoffeeDescription: "Máy bán đồ uống hiệu quả với thiết kế nhỏ gọn",
         digitalDisplay: "Màn Hình Kỹ Thuật Số",
 
         // Products Section
