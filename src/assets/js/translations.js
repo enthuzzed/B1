@@ -35,13 +35,6 @@ const translations = {
         healthyChoiceDescription: "Perfect for snacks and instant refreshments",
         premiumCoffeeMachine: "Compact Drink Machine",
         premiumCoffeeDescription: "Efficient beverage dispensing in a compact design",
-
-        // Features
-        touchscreenInterface: "Touchscreen Interface",
-        cashlessPayments: "Cashless Payments",
-        remoteMonitoring: "Remote Monitoring",
-        temperatureControl: "Temperature Control",
-        freshFoodOptions: "Fresh Food Options",
         digitalDisplay: "Digital Display",
 
         // Products Section
@@ -105,6 +98,8 @@ const translations = {
         features: "Features",
         inventoryMaintenance: "Inventory & Maintenance",
         paymentMethods: "Payment Methods",
+        restockingService: "Routine restocking and service within 24 hours",
+        revenueReports: "Transparent monthly revenue reports",
 
         // Technical Specifications Additions
         optionalHeating: "Optional dual heating module available",
@@ -242,6 +237,8 @@ const translations = {
         features: "Tính Năng",
         inventoryMaintenance: "Kho Hàng & Bảo Trì",
         paymentMethods: "Phương Thức Thanh Toán",
+        restockingService: "Dịch vụ tiếp tế hàng hóa định kỳ trong vòng 24 giờ",
+        revenueReports: "Báo cáo doanh thu minh bạch hàng tháng",
 
         // Technical Specifications Additions
         optionalHeating: "Có thể trang bị thêm mô-đun làm nóng kép",

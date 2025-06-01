@@ -7,13 +7,102 @@
     <link rel="stylesheet" href="src/assets/css/style.css">
     <link rel="icon" type="image/png" href="src/assets/images/favicon.png">
     <style>
+        /* Header Styles */
+        .header {
+            background-color: var(--primary-color);
+        }
+        .header-main {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .logo {
+            flex-shrink: 0;
+            margin-left: 0.5rem;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-grow: 1;
+            justify-content: center;
+        }
+        .language-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            position: relative;
+        }
+        .toggle-slider {
+            width: 40px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+      
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0;
+            }
+            .header-main {
+                flex-wrap: wrap;
+                padding: 1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .mobile-menu-toggle {
+                display: block;
+            }
+            .language-toggle {
+                order: 2;
+                margin-left: auto;
+            }
+            .mobile-menu-toggle {
+                display: block;
+                order: 1;
+                background: none;
+                border: none;
+                color: var(--accent-color);
+                cursor: pointer;
+                padding: 0.5rem;
+            }
+            .logo {
+                order: 2;
+            }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 0;
+                order: 4;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                padding: 1rem;
+                width: 100%;
+                text-align: center;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+        }
+
+        /* Machine Details Styles */
         .machine-details {
             padding-top: 120px;
             padding-bottom: 40px;
             background-color: var(--background-light);
-        }
-        .header {
-            background-color: var(--primary-color);
         }
         .machine-section {
             max-width: 1200px;
@@ -104,6 +193,19 @@
             color: var(--text-light);
             margin-bottom: 20px;
         }
+        .lang-option {
+            color: var(--accent-color);
+            cursor: pointer;
+            opacity: 0.7;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            font-weight: 500;
+            user-select: none;
+        }
+        .lang-option.active {
+            opacity: 1;
+            font-weight: 600;
+        }
         @media (max-width: 992px) {
             .machine-content {
                 grid-template-columns: 1fr;
@@ -116,36 +218,23 @@
     </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="nav-container">
-            <button class="mobile-menu-toggle" aria-label="Toggle menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-            </button>
-            <div class="nav-left">
+    <header class="header"> 
+            <div class="header-main">
                 <a href="/" class="logo">
                     <img src="src/assets/images/logo2.png" alt="Logo" style="width: 40px; height: 40px;">
                 </a>
+                
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="machine-details.html" class="active">Machine Details</a></li>
                 </ul>
-            </div>
-            <div class="nav-right">
-                <div class="nav-contact">
-                    <div class="language-toggle">
-                        <span class="lang-option" data-lang="en">EN</span>
-                        <div class="toggle-slider">
-                            <div class="toggle-button"></div>
-                        </div>
-                        <span class="lang-option" data-lang="vi">VN</span>
-                    </div>
+
+                <div class="language-toggle">
+                    <span class="lang-option" data-lang="en">EN</span>
+                    <div class="toggle-slider"></div>
+                    <span class="lang-option" data-lang="vi">VN</span>
                 </div>
-            </div>
-        </nav>
+            </div> 
     </header>
 
     <main>
@@ -334,9 +423,13 @@
     </footer>
 
     <script src="src/assets/js/translations.js"></script>
-    <script src="src/assets/js/main.js"></script> 
+    <script src="src/assets/js/main.js" defer></script>
     <script>
+        // Initialize language and menu functionality
         document.addEventListener('DOMContentLoaded', () => {
+            initializeLanguageToggle();
+            initializeMobileMenu();
+            initializeHeader();
             const machineImage = document.getElementById('machine-image');
             const machineNavBtns = document.querySelectorAll('.machine-nav-btn');
             const machineSpecs = document.querySelectorAll('.machine-specs');
