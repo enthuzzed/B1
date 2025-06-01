@@ -41,7 +41,6 @@ function updateLanguageUI(lang) {
 
     // Update slider position
     toggleSlider.classList.toggle('vi', lang === 'vi');
-    toggleSlider.style.transform = lang === 'vi' ? 'translateX(180%)' : 'translateX(0)';
 
     // Update flag icon
     const flagIcon = toggleSlider.querySelector('.flag-icon');
@@ -90,20 +89,26 @@ function translatePageWithAnimation() {
     }, 300);
 }
 
-// Mobile menu functionality
+// Mobile menu handling
 function initializeMobileMenu() {
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     const header = document.querySelector('.header');
-
-    if (!menuToggle || !navLinks) return;
 
     menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
         header.classList.toggle('menu-open');
     });
 
-    // Close menu when clicking a link
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-container')) {
+            navLinks.classList.remove('active');
+            header.classList.remove('menu-open');
+        }
+    });
+
+    // Close menu when clicking a nav link
     navLinks.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             navLinks.classList.remove('active');
