@@ -710,11 +710,12 @@ body {
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .machine-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
 }
 
 .machine-image {
@@ -773,6 +774,17 @@ body {
     position: absolute;
     left: 0;
     font-weight: bold;
+}
+
+.machine-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.machine-link:hover .machine-content h3 {
+    color: var(--primary-dark);
 }
 
 /* Media Queries for Machines Section */

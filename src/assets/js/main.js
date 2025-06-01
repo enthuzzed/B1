@@ -158,6 +158,47 @@ function initializeContactForm() {
     });
 }
 
+// Handle machine details navigation
+function initializeMachineDetails() {
+    const machineNavBtns = document.querySelectorAll('.machine-nav-btn');
+    const machineSpecs = document.querySelectorAll('.machine-specs');
+
+    if (!machineNavBtns.length) return;
+
+    // Function to show specific machine
+    function showMachine(machineType) {
+        machineNavBtns.forEach(b => {
+            b.classList.toggle('active', b.dataset.machine === machineType);
+        });
+        machineSpecs.forEach(spec => {
+            spec.classList.toggle('active', spec.classList.contains(machineType));
+        });
+    }
+
+    // Handle button clicks
+    machineNavBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const machine = btn.dataset.machine;
+            history.pushState(null, '', `#${machine}`);
+            showMachine(machine);
+        });
+    });
+
+    // Check URL hash on page load
+    if (location.hash) {
+        const machine = location.hash.replace('#', '');
+        showMachine(machine);
+    } else {
+        showMachine('large'); // Show large machine by default
+    }
+
+    // Handle browser back/forward
+    window.addEventListener('hashchange', () => {
+        const machine = location.hash.replace('#', '') || 'large';
+        showMachine(machine);
+    });
+}
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initializeMobileMenu();
@@ -165,4 +206,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeContactForm();
     initializeSmoothScroll();
     initializeLanguageToggle();
+    initializeMachineDetails();
 });

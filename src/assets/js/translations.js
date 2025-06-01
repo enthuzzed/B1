@@ -78,7 +78,48 @@ const translations = {
         followUs: "Follow Us",
         allRights: "All Rights Reserved",
         privacyPolicy: "Privacy Policy",
-        terms: "Terms of Use"
+        terms: "Terms of Use",
+
+        // Machine Details Page
+        largeMachine: "Large‐Capacity Vending Machine (120 Slots)",
+        mediumMachine: "Medium‐Capacity Vending Machine (60 Slots)",
+        compactMachine: "Compact Vending Machine (36 Slots)",
+        largeDescription: "Ideal for high‐traffic locations—cafeterias, lobbies, or busy office floors where variety and volume matter.",
+        mediumDescription: "Perfect for medium‐usage corridors or break rooms—offers a balanced mix of snacks and drinks without taking up too much floor space.",
+        compactDescription: "Best for low‐footfall areas or niche locations—delivers a curated selection of essentials in a minimal footprint.",
+        configuration: "Configuration",
+        slotConfig: "Slot Configuration",
+        totalCapacity: "Total Capacity",
+        suitableFor: "Suitable For",
+        dimensionsWeight: "Dimensions & Weight",
+        height: "Height",
+        width: "Width",
+        depth: "Depth",
+        weight: "Weight",
+        techSpecs: "Technical Specifications",
+        tempControl: "Temperature Control",
+        powerRequirements: "Power Requirements",
+        refrigerationMode: "Refrigeration Mode",
+        standbyMode: "Standby Mode",
+        voltage: "Voltage",
+        features: "Features",
+        inventoryMaintenance: "Inventory & Maintenance",
+        paymentMethods: "Payment Methods",
+
+        // Technical Specifications Additions
+        optionalHeating: "Optional dual heating module available",
+        touchscreenSpec: "32-inch HD touchscreen interface",
+        lodScreen: "5-inch LOD screen interface",
+        performanceMetrics: "Monthly performance reporting",
+        salesMetrics: "Clear sales metrics reporting",
+        compactDurable: "compact but durable design",
+        slimProfile: "slim‐profile frame",
+
+        // Inventory Features
+        automatedAlerts: "Automated stock alerts (remotely monitored)",
+        realtimeAlerts: "Real-time inventory alerts",
+        nextDayService: "Next-day restocking and maintenance",
+        scheduledMaintenance: "Scheduled maintenance within 24 hours"
     },
     vi: {
         // Navigation
@@ -152,6 +193,47 @@ const translations = {
         followUs: "Theo Dõi Chúng Tôi",
         allRights: "Đã Đăng Ký Bản Quyền",
         privacyPolicy: "Chính Sách Bảo Mật",
-        terms: "Điều Khoản Sử Dụng"
+        terms: "Điều Khoản Sử Dụng",
+
+        // Machine Details Page
+        largeMachine: "Máy Bán Hàng Lớn (120 Khe)",
+        mediumMachine: "Máy Bán Hàng Trung (60 Khe)",
+        compactMachine: "Máy Bán Hàng Nhỏ Gọn (36 Khe)",
+        largeDescription: "Lý tưởng cho các địa điểm đông người - căng tin, sảnh, hoặc các tầng văn phòng bận rộn, nơi cần đa dạng sản phẩm và số lượng lớn.",
+        mediumDescription: "Hoàn hảo cho hành lang hoặc phòng nghỉ có lưu lượng trung bình - cung cấp sự cân bằng giữa đồ ăn nhẹ và đồ uống trong không gian vừa phải.",
+        compactDescription: "Phù hợp cho các khu vực ít người - cung cấp các sản phẩm thiết yếu trong thiết kế nhỏ gọn.",
+        configuration: "Cấu Hình",
+        slotConfig: "Cấu Hình Khe",
+        totalCapacity: "Tổng Dung Lượng",
+        suitableFor: "Phù Hợp Cho",
+        dimensionsWeight: "Kích Thước & Trọng Lượng",
+        height: "Chiều Cao",
+        width: "Chiều Rộng",
+        depth: "Chiều Sâu",
+        weight: "Trọng Lượng",
+        techSpecs: "Thông Số Kỹ Thuật",
+        tempControl: "Điều Khiển Nhiệt Độ",
+        powerRequirements: "Yêu Cầu Điện",
+        refrigerationMode: "Chế Độ Làm Lạnh",
+        standbyMode: "Chế Độ Chờ",
+        voltage: "Điện Áp",
+        features: "Tính Năng",
+        inventoryMaintenance: "Kho Hàng & Bảo Trì",
+        paymentMethods: "Phương Thức Thanh Toán",
+
+        // Technical Specifications Additions
+        optionalHeating: "Có thể trang bị thêm mô-đun làm nóng kép",
+        touchscreenSpec: "Màn hình cảm ứng HD 32 inch",
+        lodScreen: "Màn hình LOD 5 inch",
+        performanceMetrics: "Báo cáo hiệu suất hàng tháng",
+        salesMetrics: "Báo cáo số liệu bán hàng rõ ràng",
+        compactDurable: "thiết kế nhỏ gọn nhưng bền bỉ",
+        slimProfile: "khung máy mỏng gọn",
+
+        // Inventory Features
+        automatedAlerts: "Cảnh báo kho tự động (giám sát từ xa)",
+        realtimeAlerts: "Cảnh báo tồn kho thời gian thực",
+        nextDayService: "Bổ sung hàng và bảo trì trong ngày hôm sau",
+        scheduledMaintenance: "Bảo trì theo lịch trong vòng 24 giờ"
     }
 };
