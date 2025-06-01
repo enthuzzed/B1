@@ -218,7 +218,8 @@
     </style>
 </head>
 <body>
-    <header class="header"> 
+    <header class="header">
+        <nav class="nav-container">
             <div class="header-main">
                 <a href="/" class="logo">
                     <img src="src/assets/images/logo2.png" alt="Logo" style="width: 40px; height: 40px;">
@@ -231,10 +232,13 @@
 
                 <div class="language-toggle">
                     <span class="lang-option" data-lang="en">EN</span>
-                    <div class="toggle-slider"></div>
+                    <div class="toggle-slider">
+                    </div>
                     <span class="lang-option" data-lang="vi">VN</span>
                 </div>
-            </div> 
+            </div>
+
+        </nav>
     </header>
 
     <main>
@@ -425,61 +429,70 @@
     <script src="src/assets/js/translations.js"></script>
     <script src="src/assets/js/main.js" defer></script>
     <script>
-        // Initialize language and menu functionality
         document.addEventListener('DOMContentLoaded', () => {
+            // Initialize base functionality
             initializeLanguageToggle();
             initializeMobileMenu();
             initializeHeader();
-            const machineImage = document.getElementById('machine-image');
-            const machineNavBtns = document.querySelectorAll('.machine-nav-btn');
-            const machineSpecs = document.querySelectorAll('.machine-specs');
-            const imageMap = {
-                'large': 'src/assets/images/big.png',
-                'medium': 'src/assets/images/mid.png',
-                'compact': 'src/assets/images/small.png'
-            };
 
-            function showMachine(machineType) {
-                // Update buttons
-                machineNavBtns.forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.machine === machineType);
-                });
+            // Initialize machine display functionality
+            function initializeMachineDisplay() {
+                const machineImage = document.getElementById('machine-image');
+                const machineNavBtns = document.querySelectorAll('.machine-nav-btn');
+                const machineSpecs = document.querySelectorAll('.machine-specs');
+                const imageMap = {
+                    'large': 'src/assets/images/big.png',
+                    'medium': 'src/assets/images/mid.png',
+                    'compact': 'src/assets/images/small.png'
+                };
 
-                // Update specs
-                machineSpecs.forEach(spec => {
-                    spec.classList.toggle('active', spec.classList.contains(machineType));
-                });
+                function showMachine(machineType) {
+                    // Update buttons
+                    machineNavBtns.forEach(btn => {
+                        btn.classList.toggle('active', btn.dataset.machine === machineType);
+                    });
 
-                // Update image
-                machineImage.src = imageMap[machineType] || imageMap.large;
-                
-                // Update URL hash without triggering hashchange
-                history.replaceState(null, '', `#${machineType}`);
-            }
+                    // Update specs
+                    machineSpecs.forEach(spec => {
+                        spec.classList.toggle('active', spec.classList.contains(machineType));
+                    });
 
-            // Handle button clicks
-            machineNavBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const machine = btn.dataset.machine;
-                    showMachine(machine);
-                });
-            });
-
-            // Check URL hash on page load
-            const hash = window.location.hash.replace('#', '');
-            if (hash && ['large', 'medium', 'compact'].includes(hash)) {
-                showMachine(hash);
-            } else {
-                showMachine('large'); // Default to large if no valid hash
-            }
-
-            // Handle browser back/forward
-            window.addEventListener('hashchange', () => {
-                const newHash = window.location.hash.replace('#', '');
-                if (['large', 'medium', 'compact'].includes(newHash)) {
-                    showMachine(newHash);
+                    // Update image
+                    if (machineImage && imageMap[machineType]) {
+                        machineImage.src = imageMap[machineType];
+                    }
+                    
+                    // Update URL hash
+                    history.replaceState(null, '', `#${machineType}`);
                 }
-            });
+
+                // Handle button clicks
+                machineNavBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const machine = btn.dataset.machine;
+                        showMachine(machine);
+                    });
+                });
+
+                // Check URL hash on page load
+                const hash = window.location.hash.replace('#', '');
+                if (hash && ['large', 'medium', 'compact'].includes(hash)) {
+                    showMachine(hash);
+                } else {
+                    showMachine('large'); // Default to large if no valid hash
+                }
+
+                // Handle browser back/forward
+                window.addEventListener('hashchange', () => {
+                    const newHash = window.location.hash.replace('#', '');
+                    if (['large', 'medium', 'compact'].includes(newHash)) {
+                        showMachine(newHash);
+                    }
+                });
+            }
+
+            // Start the machine display functionality
+            initializeMachineDisplay();
         });
     </script>
 </body>
