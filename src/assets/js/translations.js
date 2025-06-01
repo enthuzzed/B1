@@ -119,7 +119,29 @@ const translations = {
         automatedAlerts: "Automated stock alerts (remotely monitored)",
         realtimeAlerts: "Real-time inventory alerts",
         nextDayService: "Next-day restocking and maintenance",
-        scheduledMaintenance: "Scheduled maintenance within 24 hours"
+        scheduledMaintenance: "Scheduled maintenance within 24 hours",
+
+        // Main Page Features
+        touchscreenFeature: "Touchscreen Interface",
+        cashlessFeature: "Cashless Payments",
+        remoteMonitoringFeature: "Remote Monitoring",
+        temperatureFeature: "Temperature Control",
+        freshFoodFeature: "Fresh Food Options",
+        digitalDisplayFeature: "Digital Display",
+
+        // Product Categories
+        premiumChips: "Premium Chips",
+        chocolateBars: "Chocolate Bars",
+        healthySnacks: "Healthy Snacks",
+        energyBars: "Energy Bars",
+        softDrinks: "Soft Drinks",
+        freshCoffee: "Fresh Coffee",
+        energyDrinks: "Energy Drinks",
+        water: "Water",
+        sandwiches: "Sandwiches",
+        salads: "Salads",
+        fruitCups: "Fruit Cups",
+        yogurt: "Yogurt"
     },
     vi: {
         // Navigation
@@ -234,6 +256,28 @@ const translations = {
         automatedAlerts: "Cảnh báo kho tự động (giám sát từ xa)",
         realtimeAlerts: "Cảnh báo tồn kho thời gian thực",
         nextDayService: "Bổ sung hàng và bảo trì trong ngày hôm sau",
-        scheduledMaintenance: "Bảo trì theo lịch trong vòng 24 giờ"
+        scheduledMaintenance: "Bảo trì theo lịch trong vòng 24 giờ",
+
+        // Main Page Features
+        touchscreenFeature: "Giao Diện Cảm Ứng",
+        cashlessFeature: "Thanh Toán Không Tiền Mặt",
+        remoteMonitoringFeature: "Giám Sát Từ Xa",
+        temperatureFeature: "Kiểm Soát Nhiệt Độ",
+        freshFoodFeature: "Tùy Chọn Thực Phẩm Tươi",
+        digitalDisplayFeature: "Màn Hình Kỹ Thuật Số",
+
+        // Product Categories
+        premiumChips: "Snack Cao Cấp",
+        chocolateBars: "Thanh Sôcôla",
+        healthySnacks: "Đồ Ăn Vặt Lành Mạnh",
+        energyBars: "Thanh Năng Lượng",
+        softDrinks: "Nước Ngọt",
+        freshCoffee: "Cà Phê Tươi",
+        energyDrinks: "Nước Tăng Lực",
+        water: "Nước Uống",
+        sandwiches: "Bánh Mì Kẹp",
+        salads: "Salad",
+        fruitCups: "Cốc Trái Cây",
+        yogurt: "Sữa Chua"
     }
 };
