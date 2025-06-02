@@ -86,6 +86,12 @@
                 flex-direction: column;
                 gap: 0;
                 order: 4;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary-color);
+                z-index: 100;
             }
             .nav-links.active {
                 display: flex;
@@ -103,6 +109,8 @@
             padding-top: 120px;
             padding-bottom: 40px;
             background-color: var(--background-light);
+            position: relative;
+            z-index: 1;
         }
         .machine-section {
             max-width: 1200px;
@@ -118,6 +126,10 @@
             justify-content: center;
             gap: 20px;
             margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+            flex-wrap: wrap;
+            padding: 10px 0;
         }
         .machine-nav-btn {
             padding: 12px 24px;
@@ -128,6 +140,17 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            outline: none;
+            touch-action: manipulation;
+            position: relative;
+            z-index: 3;
+        }
+        .machine-nav-btn:active {
+            transform: scale(0.98);
         }
         .machine-nav-btn.active {
             background: var(--primary-color);
@@ -244,10 +267,10 @@
     <main>
         <section class="machine-details">
             <div class="machine-section">
-                <div class="machine-nav">
-                    <button class="machine-nav-btn active" data-machine="large" data-translate="largeMachine">Large Capacity</button>
-                    <button class="machine-nav-btn" data-machine="medium" data-translate="mediumMachine">Medium Capacity</button>
-                    <button class="machine-nav-btn" data-machine="compact" data-translate="compactMachine">Compact</button>
+                <div class="machine-nav" role="tablist" aria-label="Machine size options">
+                    <button class="machine-nav-btn active" id="large-btn" data-machine="large" data-translate="largeMachine" role="tab" aria-selected="true" aria-controls="large-specs">Large Capacity</button>
+                    <button class="machine-nav-btn" id="medium-btn" data-machine="medium" data-translate="mediumMachine" role="tab" aria-selected="false" aria-controls="medium-specs">Medium Capacity</button>
+                    <button class="machine-nav-btn" id="compact-btn" data-machine="compact" data-translate="compactMachine" role="tab" aria-selected="false" aria-controls="compact-specs">Compact</button>
                 </div>
 
                 <div class="machine-content">
@@ -256,7 +279,7 @@
                     </div>
 
                     <!-- Large Capacity Machine -->
-                    <div class="machine-specs large active">
+                    <div class="machine-specs large active" id="large-specs" role="tabpanel" aria-labelledby="large-btn">
                         <h2 class="machine-title" data-translate="largeMachine">Large‐Capacity Vending Machine (120 Slots)</h2>
                         <p class="machine-description" data-translate="largeDescription">Ideal for high‐traffic locations—cafeterias, lobbies, or busy office floors where variety and volume matter.</p>
                         
@@ -303,7 +326,7 @@
                     </div>
 
                     <!-- Medium Capacity Machine -->
-                    <div class="machine-specs medium">
+                    <div class="machine-specs medium" id="medium-specs" role="tabpanel" aria-labelledby="medium-btn" aria-hidden="true">
                         <h2 class="machine-title" data-translate="mediumMachine">Medium‐Capacity Vending Machine (60 Slots)</h2>
                         <p class="machine-description" data-translate="mediumDescription">Perfect for medium‐usage corridors or break rooms—offers a balanced mix of snacks and drinks without taking up too much floor space.</p>
                         
@@ -350,7 +373,7 @@
                     </div>
 
                     <!-- Compact Machine -->
-                    <div class="machine-specs compact">
+                    <div class="machine-specs compact" id="compact-specs" role="tabpanel" aria-labelledby="compact-btn" aria-hidden="true">
                         <h2 class="machine-title" data-translate="compactMachine">Compact Vending Machine (36 Slots)</h2>
                         <p class="machine-description" data-translate="compactDescription">Best for low‐footfall areas or niche locations—delivers a curated selection of essentials in a minimal footprint.</p>
                         
@@ -430,71 +453,16 @@
     <script src="src/assets/js/main.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Initialize base functionality
+            // Initialize all functionality
             initializeLanguageToggle();
             initializeMobileMenu();
             initializeHeader();
-
-            // Initialize machine display functionality
-            function initializeMachineDisplay() {
-                const machineImage = document.getElementById('machine-image');
-                const machineNavBtns = document.querySelectorAll('.machine-nav-btn');
-                const machineSpecs = document.querySelectorAll('.machine-specs');
-                const imageMap = {
-                    'large': 'src/assets/images/big.png',
-                    'medium': 'src/assets/images/mid.png',
-                    'compact': 'src/assets/images/small.png'
-                };
-
-                function showMachine(machineType) {
-                    // Update buttons
-                    machineNavBtns.forEach(btn => {
-                        btn.classList.toggle('active', btn.dataset.machine === machineType);
-                    });
-
-                    // Update specs
-                    machineSpecs.forEach(spec => {
-                        spec.classList.toggle('active', spec.classList.contains(machineType));
-                    });
-
-                    // Update image
-                    if (machineImage && imageMap[machineType]) {
-                        machineImage.src = imageMap[machineType];
-                    }
-                    
-                    // Update URL hash
-                    history.replaceState(null, '', `#${machineType}`);
-                }
-
-                // Handle button clicks
-                machineNavBtns.forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const machine = btn.dataset.machine;
-                        showMachine(machine);
-                    });
-                });
-
-                // Check URL hash on page load
-                const hash = window.location.hash.replace('#', '');
-                if (hash && ['large', 'medium', 'compact'].includes(hash)) {
-                    showMachine(hash);
-                } else {
-                    showMachine('large'); // Default to large if no valid hash
-                }
-
-                // Handle browser back/forward
-                window.addEventListener('hashchange', () => {
-                    const newHash = window.location.hash.replace('#', '');
-                    if (['large', 'medium', 'compact'].includes(newHash)) {
-                        showMachine(newHash);
-                    }
-                });
-            }
-
-            // Start the machine display functionality
-            initializeMachineDisplay();
+            initializeSmoothScroll();
+            initializeContactForm();
+            initializeMachineDetails(); 
         });
     </script>
+    
 </body>
 
 </html>

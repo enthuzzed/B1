@@ -94,6 +94,7 @@ function initializeMobileMenu() {
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
     const header = document.querySelector('.header');
+    if (!menuToggle || !navLinks || !header) return;
 
     menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
@@ -165,51 +166,167 @@ function initializeContactForm() {
 
 // Handle machine details navigation
 function initializeMachineDetails() {
-    const machineNavBtns = document.querySelectorAll('.machine-nav-btn');
+    const machineNavContainer = document.querySelector('.machine-nav');
+    if (!machineNavContainer) return;
+
+    const machineNavBtns = machineNavContainer.querySelectorAll('.machine-nav-btn');
     const machineSpecs = document.querySelectorAll('.machine-specs');
+    const machineImageContainer = document.querySelector('.machine-image');
+    const machineImage = document.getElementById('machine-image');
 
-    if (!machineNavBtns.length) return;
+    const imageMap = {
+        'large': 'src/assets/images/big.png',
+        'medium': 'src/assets/images/mid.png',
+        'compact': 'src/assets/images/small.png'
+    };
 
-    // Function to show specific machine
+    // Preload images for smoother transitions
+    Object.values(imageMap).forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+
+    function updateImage(machineType) {
+        if (!machineImage || !imageMap[machineType]) return;
+        
+        machineImageContainer.classList.add('loading');
+        const newSrc = imageMap[machineType];
+        
+        // Only change if different
+        if (machineImage.src.endsWith(newSrc)) {
+            machineImageContainer.classList.remove('loading');
+            return;
+        }
+
+        const altText = `${machineType.charAt(0).toUpperCase() + machineType.slice(1)} Capacity Vending Machine`;
+        
+        // Fade out
+        machineImage.style.opacity = '0';
+        machineImage.style.transform = 'scale(0.98)';
+        
+        setTimeout(() => {
+            machineImage.src = newSrc;
+            machineImage.alt = altText;
+            machineImage.setAttribute('aria-label', altText);
+            
+            // Remove loading state once image is loaded
+            machineImage.onload = () => {
+                machineImage.style.opacity = '1';
+                machineImage.style.transform = 'scale(1)';
+                machineImageContainer.classList.remove('loading');
+            };
+        }, 200);
+    }
+
     function showMachine(machineType) {
-        machineNavBtns.forEach(b => {
-            b.classList.toggle('active', b.dataset.machine === machineType);
+        if (!['large', 'medium', 'compact'].includes(machineType)) {
+            machineType = 'large';
+        }
+
+        // Update buttons
+        machineNavBtns.forEach(btn => {
+            const isActive = btn.dataset.machine === machineType;
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-selected', isActive);
         });
+
+        // Update specs with staggered animation
         machineSpecs.forEach(spec => {
-            spec.classList.toggle('active', spec.classList.contains(machineType));
+            const shouldBeActive = spec.classList.contains(machineType);
+            
+            if (shouldBeActive && !spec.classList.contains('active')) {
+                // Show new content
+                spec.style.display = 'block';
+                spec.style.opacity = '0';
+                spec.style.transform = 'translateY(10px)';
+                
+                // Trigger animation
+                requestAnimationFrame(() => {
+                    spec.classList.add('active');
+                    spec.style.opacity = '1';
+                    spec.style.transform = 'translateY(0)';
+                });
+            } else if (!shouldBeActive && spec.classList.contains('active')) {
+                // Hide old content
+                spec.classList.remove('active');
+                spec.style.opacity = '0';
+                spec.style.transform = 'translateY(-10px)';
+                
+                setTimeout(() => {
+                    if (!spec.classList.contains('active')) {
+                        spec.style.display = 'none';
+                    }
+                }, 300);
+            }
         });
+
+        // Update image with transition
+        updateImage(machineType);
+
+        // Update URL without scrolling
+        const newUrl = new URL(window.location.href);
+        newUrl.hash = machineType;
+        history.replaceState(null, '', newUrl);
     }
 
-    // Handle button clicks
-    machineNavBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const machine = btn.dataset.machine;
-            history.pushState(null, '', `#${machine}`);
-            showMachine(machine);
-        });
+    // Handle button clicks with debouncing
+    let lastClick = 0;
+    machineNavContainer.addEventListener('click', (e) => {
+        const btn = e.target.closest('.machine-nav-btn');
+        if (!btn || btn.classList.contains('active')) return;
+
+        const now = Date.now();
+        if (now - lastClick < 300) return; // Debounce clicks
+        lastClick = now;
+
+        e.preventDefault();
+        showMachine(btn.dataset.machine);
     });
 
-    // Check URL hash on page load
-    if (location.hash) {
-        const machine = location.hash.replace('#', '');
-        showMachine(machine);
-    } else {
-        showMachine('large'); // Show large machine by default
-    }
+    // Handle keyboard navigation
+    machineNavContainer.addEventListener('keydown', (e) => {
+        const btn = e.target.closest('.machine-nav-btn');
+        if (!btn) return;
 
-    // Handle browser back/forward
+        let newIndex;
+        const current = Array.from(machineNavBtns).indexOf(btn);
+
+        switch (e.key) {
+            case 'ArrowRight':
+            case 'ArrowDown':
+                newIndex = (current + 1) % machineNavBtns.length;
+                break;
+            case 'ArrowLeft':
+            case 'ArrowUp':
+                newIndex = (current - 1 + machineNavBtns.length) % machineNavBtns.length;
+                break;
+            default:
+                return;
+        }
+
+        e.preventDefault();
+        const newBtn = machineNavBtns[newIndex];
+        newBtn.focus();
+        showMachine(newBtn.dataset.machine);
+    });
+
+    // Handle hash changes
     window.addEventListener('hashchange', () => {
-        const machine = location.hash.replace('#', '') || 'large';
-        showMachine(machine);
+        const hash = window.location.hash.replace('#', '');
+        showMachine(hash || 'large');
     });
+
+    // Initial setup from URL hash or default
+    const initialMachine = window.location.hash.replace('#', '') || 'large';
+    showMachine(initialMachine);
 }
 
-// Initialize everything when DOM is loaded
+// Initialization
 document.addEventListener('DOMContentLoaded', () => {
+    initializeLanguageToggle();
     initializeMobileMenu();
     initializeHeader();
-    initializeContactForm();
     initializeSmoothScroll();
-    initializeLanguageToggle();
+    initializeContactForm();
     initializeMachineDetails();
 });
