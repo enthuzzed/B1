@@ -10,7 +10,7 @@ const translations = {
         // Hero Section
         smartVendingSolutions: "Smart Vending Solutions for Modern Spaces",
         transformSpace: "Transform your space with intelligent vending machines that deliver premium products 24/7",
-        viewMachines: "View Machines",
+        viewMachines: "Download Brochure",
 
         // Stats
         machinesDeployed: "Machines Deployed",
@@ -149,7 +149,7 @@ const translations = {
         // Hero Section
         smartVendingSolutions: "Giải Pháp Máy Bán Hàng Thông Minh",
         transformSpace: "Nâng tầm không gian của bạn với máy bán hàng thông minh, cung cấp sản phẩm cao cấp 24/7",
-        viewMachines: "Xem Máy",
+        viewMachines: "Tải Brochure",
 
         // Stats
         machinesDeployed: "Máy Đã Lắp Đặt",

@@ -62,6 +62,13 @@ function detectBrowserLanguage() {
 function translatePage() {
     document.documentElement.lang = langState.current;
     const elements = document.querySelectorAll('[data-translate]');
+    
+    // Update brochure link
+    const brochureLink = document.querySelector('[data-brochure="true"]');
+    if (brochureLink) {
+        brochureLink.href = `src/assets/documents/brochure-${langState.current}.pdf`;
+    }
+    
     elements.forEach(element => {
         const key = element.getAttribute('data-translate');
         if (translations[langState.current] && translations[langState.current][key]) {
